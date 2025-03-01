@@ -31,9 +31,9 @@ ALLOWED_SYMBOLS = ["GO", "RIGHT", "LEFT", "TAKE", "LANTERN"]
 
 class ParserText < Minitest::Test
   def test_get_recognized_commands_multiple_correct
-    input = "I WILL GO RIGHT AND TAKE A LANTERN"
+    input = "Okay, I will go to the right and take the lantern"
     lexer = Lexer.new(ALLOWED_SYMBOLS)
-    recognized_symbols = lexer.get_recognized_symbols(input)
+    recognized_symbols = lexer._get_recognized_symbols(input)
 
     parser = Parser.new(recognized_symbols, COMMANDS)
     result = parser._get_recognized_commands(input)
@@ -43,9 +43,9 @@ class ParserText < Minitest::Test
   end
 
   def test_get_recognized_commands_multiple_incorrect
-    input = "I WILL RIGHT GO AND LANTERN TAKE"
+    input = "I think I will right go and lantern take"
     lexer = Lexer.new(ALLOWED_SYMBOLS)
-    recognized_symbols = lexer.get_recognized_symbols(input)
+    recognized_symbols = lexer._get_recognized_symbols(input)
 
     parser = Parser.new(recognized_symbols, COMMANDS)
     result = parser._get_recognized_commands(input)
@@ -55,9 +55,9 @@ class ParserText < Minitest::Test
   end
 
   def test_get_recognized_commands_single_correct
-    input = "I WILL GO RIGHT"
+    input = "Ok, I'm gonna go to the right"
     lexer = Lexer.new(ALLOWED_SYMBOLS)
-    recognized_symbols = lexer.get_recognized_symbols(input)
+    recognized_symbols = lexer._get_recognized_symbols(input)
 
     parser = Parser.new(recognized_symbols, COMMANDS)
     result = parser._get_recognized_commands(input)
@@ -67,9 +67,9 @@ class ParserText < Minitest::Test
   end
 
   def test_get_recognized_commands_single_correct_duplicated_input
-    input = "I WILL GO RIGHT FOR FOR"
+    input = "I will go to... Idk, the right"
     lexer = Lexer.new(ALLOWED_SYMBOLS)
-    recognized_symbols = lexer.get_recognized_symbols(input)
+    recognized_symbols = lexer._get_recognized_symbols(input)
 
     parser = Parser.new(recognized_symbols, COMMANDS)
     result = parser._get_recognized_commands(input)

@@ -41,6 +41,6 @@ class Parser
   end
 
   def _is_multiple?
-    @recognized_symbols.include?("AND")
+    @recognized_symbols.include?("and") or @recognized_symbols.include?("AND")
   end
 end

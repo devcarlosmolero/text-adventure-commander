@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.description = "Ruby gem that allows to analyze user input and execute actions through its symbolic and semantic analysis."
   s.authors = ["Carlos Molero"]
   s.email = "dev@carlosmolero.com"
-  s.files = ["lib/text-engine.rb", "lib/text-engine/lexer.rb", "lib/text-engine/parser.rb"]
+  s.files = ["lib/text-engine.rb", "lib/text-engine/lexer.rb", "lib/text-engine/parser.rb", "lib/text-engine/utils.rb"]
   s.homepage =
     "https://rubygems.org/gems/text-engine"
   s.license = "MIT"

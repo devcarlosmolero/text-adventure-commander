@@ -9,7 +9,7 @@ class Lexer
     recognized_symbols = []
     input_array = input.split(" ")
     input_array.each do |word|
-      recognized_symbols << word if @allowed_symbols.include?(word)
+      recognized_symbols << word if @allowed_symbols.include?(word.upcase)
     end
     recognized_symbols
   end
