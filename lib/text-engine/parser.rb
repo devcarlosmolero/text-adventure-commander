@@ -2,19 +2,18 @@ require "text-engine/utils"
 
 class Parser
   include Utils
-  def initialize(recognized_symbols, commands)
-    @recognized_symbols = recognized_symbols
+  def initialize(commands)
     @commands = commands
   end
 
-  def _get_recognized_commands(input)
+  def _get_recognized_commands(recognized_symbols, input)
     commands = @commands.keys
     recognized_commands = []
     unrecognized_commands = []
     unrecognized_hint = nil
 
-    if _is_multiple?
-      normalize_array(@recognized_symbols, "and").each do |part|
+    if _is_multiple?(recognized_symbols)
+      normalize_array(recognized_symbols, "and").each do |part|
         if commands.to_s.downcase.include?(part.tr(" ", "_"))
           recognized_commands << part
         else
@@ -24,8 +23,8 @@ class Parser
       end
     end
 
-    if !_is_multiple?
-      part = normalize_array(@recognized_symbols, " ").join(" ")
+    if !_is_multiple?(recognized_symbols)
+      part = normalize_array(recognized_symbols, " ").join(" ")
       recognized_commands << part if commands.to_s.downcase.include?(part.tr(" ", "_"))
       if !commands.to_s.downcase.include?(part.tr(" ", "_"))
         unrecognized_commands << part
@@ -40,7 +39,7 @@ class Parser
     }
   end
 
-  def _is_multiple?
-    @recognized_symbols.include?("and") or @recognized_symbols.include?("AND")
+  def _is_multiple?(recognized_symbols)
+    recognized_symbols.include?("and") or recognized_symbols.include?("AND")
   end
 end

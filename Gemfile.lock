@@ -90,6 +90,7 @@ PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
+  rubocop (~> 1.71)
   solargraph (~> 0.52.0)
   standard (~> 1.45)
 
