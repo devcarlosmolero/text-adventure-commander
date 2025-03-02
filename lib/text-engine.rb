@@ -10,9 +10,7 @@ class TextEngine
       end
     end
 
-    allowed_symbols = allowed_symbols.uniq
-
-    @lexer = Lexer.new(allowed_symbols)
+    @allowed_symbols = allowed_symbols.uniq
     @parser = Parser.new(commands)
   end
 
@@ -26,7 +24,7 @@ class TextEngine
   end
 
   def get_commands_from(input)
-    recognized_symbols = @lexer.get_recognized_symbols(input)
+    recognized_symbols = Lexer.get_recognized_symbols(@allowed_symbols, input)
     @parser.get_recognized_commands(recognized_symbols, input)
   end
 
