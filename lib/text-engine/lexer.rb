@@ -2,14 +2,13 @@ class Lexer
   attr_reader :allowed_symbols
   def initialize(allowed_symbols)
     @allowed_symbols = allowed_symbols
-    @allowed_symbols << "AND"
   end
 
-  def _get_recognized_symbols(input)
+  def get_recognized_symbols(input)
     recognized_symbols = []
-    input_array = input.split(" ")
+    input_array = input.gsub(/[^a-zA-Z\s]/, "").split(" ")
     input_array.each do |word|
-      recognized_symbols << word if @allowed_symbols.include?(word.upcase)
+      recognized_symbols << word.upcase if @allowed_symbols.include?(word.upcase)
     end
     recognized_symbols
   end

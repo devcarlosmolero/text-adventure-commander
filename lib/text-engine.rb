@@ -1,14 +1,36 @@
+require "text-engine/parser"
+require "text-engine/lexer"
+
 class TextEngine
-  def initialize(allowed_symbols, commands)
+  def initialize(commands)
+    allowed_symbols = []
+    commands.keys.map do |key|
+      key.to_s.split("_").each do |part|
+        allowed_symbols << part
+      end
+    end
+
+    allowed_symbols = allowed_symbols.uniq
+
     @lexer = Lexer.new(allowed_symbols)
     @parser = Parser.new(commands)
   end
 
+  def print_available_commands
+    options = []
+    @parser.commands.each do |command, _|
+      options << command.to_s.tr("_", " ").capitalize
+    end
+
+    "[Options: #{options.join(" | ")}]"
+  end
+
   def get_commands_from(input)
-    recognized_symbols = @lexer._get_recognized_symbols(input)
-    @parser._get_recognized_commands(recognized_symbols, input)
+    recognized_symbols = @lexer.get_recognized_symbols(input)
+    @parser.get_recognized_commands(recognized_symbols, input)
+  end
+
+  def execute_command(actor, command)
+    actor.send(@parser.commands[command.tr(" ", "_").upcase.to_sym])
   end
 end
-
-require "text-engine/parser"
-require "text-engine/lexer"

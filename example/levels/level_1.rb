@@ -12,6 +12,7 @@ class Level1
     puts "Where do you want to go? #{text_engine.print_available_commands}"
     input = gets
     result = text_engine.get_commands_from(input)
+    puts result
     result[:recognized].each do |command|
       text_engine.execute_command(Level1, command)
     end

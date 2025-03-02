@@ -1,45 +1,32 @@
-require "text-engine/utils"
-
 class Parser
-  include Utils
+  attr_reader :commands
   def initialize(commands)
     @commands = commands
   end
 
-  def _get_recognized_commands(recognized_symbols, input)
-    commands = @commands.keys
+  def get_recognized_commands(recognized_symbols, input)
     recognized_commands = []
-    unrecognized_commands = []
-    unrecognized_hint = nil
+    commands_as_array = get_commands_as_array
 
-    if _is_multiple?(recognized_symbols)
-      normalize_array(recognized_symbols, "and").each do |part|
-        if commands.to_s.downcase.include?(part.tr(" ", "_"))
-          recognized_commands << part
-        else
-          unrecognized_commands << part
-          unrecognized_hint = "Check the order of the symbols."
-        end
+    i = 0
+    while i < recognized_symbols.length
+      current_word = recognized_symbols[i].downcase
+      next_word = recognized_symbols[i + 1]&.downcase
+
+      if commands_as_array.include?([current_word, next_word])
+        recognized_commands << "#{recognized_symbols[i]} #{recognized_symbols[i + 1]}"
+        i += 2
+      else
+        i += 1
       end
     end
 
-    if !_is_multiple?(recognized_symbols)
-      part = normalize_array(recognized_symbols, " ").join(" ")
-      recognized_commands << part if commands.to_s.downcase.include?(part.tr(" ", "_"))
-      if !commands.to_s.downcase.include?(part.tr(" ", "_"))
-        unrecognized_commands << part
-        unrecognized_hint = "If you're trying to invoke more than 1 command use 'AND' to join them."
-      end
-    end
-
-    {
-      recognized: recognized_commands,
-      unrecognized: unrecognized_commands,
-      unrecognized_hint: unrecognized_hint
-    }
+    recognized_commands.map(&:downcase)
   end
 
-  def _is_multiple?(recognized_symbols)
-    recognized_symbols.include?("and") or recognized_symbols.include?("AND")
+  private
+
+  def get_commands_as_array
+    @commands.keys.map { |key| key.to_s.downcase.split("_") }
   end
 end
