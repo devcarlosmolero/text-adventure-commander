@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require "rspec"
-require "text-engine/lexer"
-require "text-engine/parser"
+require "text-adventure-commander/lexer"
+require "text-adventure-commander/parser"
 require "data"
 
 RSpec.describe Parser do

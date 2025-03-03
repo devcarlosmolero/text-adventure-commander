@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "rspec"
-require "text-engine/lexer"
+require "text-adventure-commander/lexer"
 require "data"
 
 RSpec.describe Lexer do

@@ -1,7 +1,7 @@
-require "text-engine/parser"
-require "text-engine/lexer"
+require "text-adventure-commander/parser"
+require "text-adventure-commander/lexer"
 
-class TextEngine
+class TextAdventureCommander
   def initialize(commands)
     allowed_symbols = []
     commands.keys.map do |key|

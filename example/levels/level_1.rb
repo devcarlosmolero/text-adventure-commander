@@ -1,4 +1,4 @@
-require "text-engine"
+require "text-adventure-commander"
 
 class Level1
   COMMANDS = {
@@ -8,13 +8,13 @@ class Level1
     GO_BOTTOM: :go_bottom
   }
   def self.Start
-    text_engine = TextEngine.new(COMMANDS)
-    puts "Where do you want to go? #{text_engine.print_available_commands}"
+    commander = TextAdventureCommander.new(COMMANDS)
+    puts "Where do you want to go? #{commander.print_available}"
     input = gets
-    result = text_engine.get_commands_from(input)
+    result = commander.get(input)
     puts result
     result[:recognized].each do |command|
-      text_engine.execute_command(Level1, command)
+      commander.execute(Level1, command)
     end
   end
 
