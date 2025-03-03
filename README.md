@@ -1,4 +1,13 @@
 <p align="center">
-[![Tests](https://github.com/devcarlosmolero/text-engine/actions/workflows/rspec.yml/badge.svg)](https://github.com/devcarlosmolero/text-engine/actions/workflows/rspec.yml)
 <img src="./logo.svg" width="80px" height="80px"/>
 </p>
+<h1 align="center">Text Aventure: Text Engine</h1>
+<p align="center">
+<img src="https://github.com/devcarlosmolero/text-engine/actions/workflows/rspec.yml/badge.svg"/>
+</p>
+
+A simple but powerful gem that uses a Lexer in combination with a Parser to detect and execute commands in text-based video games.
+
+This gem is not alone, it is part of an ecosystem designed to make simple the development of this kind of projects.
+
+> I still need to update this README.
