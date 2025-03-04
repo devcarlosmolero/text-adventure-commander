@@ -21,7 +21,7 @@ class Parser
       end
     end
 
-    recognized_commands.map(&:downcase)
+    recognized_commands.map { |command| command.tr(" ", "_").upcase }.uniq
   end
 
   private

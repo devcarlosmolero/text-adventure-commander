@@ -23,12 +23,12 @@ class TextAdventureCommander
     "[Options: #{options.join(" | ")}]"
   end
 
+  def get_command(command)
+    @parser.commands[command.to_sym]
+  end
+
   def get_commands_from(input)
     recognized_symbols = Lexer.get_recognized_symbols(@allowed_symbols, input)
     @parser.get_recognized_commands(recognized_symbols, input)
-  end
-
-  def execute_command(actor, command)
-    actor.send(@parser.commands[command.tr(" ", "_").upcase.to_sym])
   end
 end
